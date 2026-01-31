@@ -24,7 +24,6 @@ dist-ssr
 *.sw?
 
 # Capacitor & Android Build
-/android
 /ios
 /dist
 /node_modules
@@ -32,7 +31,13 @@ dist-ssr
 capacitor.config.json
 capacitor.config.ts.old
 
-# Android Specific (if not ignoring the whole folder)
-# android/app/build
-# android/app/release
-# android/local.properties
+# Android Related
+android/.gradle
+android/build
+android/app/build
+android/local.properties
+android/captures
+android/.externalNativeBuild
+android/.idea
+android/*.iml
+android/app/*.iml
