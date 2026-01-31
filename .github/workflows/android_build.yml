@@ -35,8 +35,18 @@ jobs:
       - name: Build Web Assets
         run: npm run build
 
+      - name: Debug File Structure
+        run: ls -R
+
       - name: Sync Capacitor
-        run: npx cap sync android
+        run: |
+          if [ ! -d "android" ]; then
+            echo "Android folder missing, adding platform..."
+            npx cap add android
+          else
+            echo "Android folder found, syncing..."
+            npx cap sync android || (echo "Sync failed, trying to re-add platform..." && npx cap add android && npx cap sync android)
+          fi
 
       - name: Build Android Debug APK
         run: |
