@@ -60,10 +60,8 @@ describe('FutManager Pro Workflow', () => {
         const matchTab = screen.getByText('Partida');
         await user.click(matchTab);
 
-        // Check "Jogadores Presentes" count
-        // In MatchManager, there is text "Jogadores Presentes" and the number below it.
-        // Or "Jogadores Presentes" text and sibling has count.
-        expect(screen.getByText(/jogadores presentes/i)).toBeInTheDocument();
+        // In MatchManager, there is text "Jogadores de Linha"
+        expect(screen.queryAllByText(/jogadores de linha/i).length).toBeGreaterThan(0);
         expect(screen.getByText('1')).toBeInTheDocument(); // Should be 1
 
         // Success!

@@ -36,9 +36,11 @@ export const generateSmartTeams = async (
 
   const prompt = `
     Atue como um técnico de futebol experiente. Tenho uma lista com ${availablePlayers.length} jogadores presentes.
-    Preciso dividir TODOS eles em dois grandes elencos (Time A e Time B) de forma equilibrada.
+    Preciso dividir apenas os JOGADORES DE LINHA (Defensores, Meias e Atacantes) em dois grandes elencos (Time A e Time B) de forma equilibrada.
     
-    Nota: O limite de jogadores em campo é ${playersPerTeam}, mas você deve alocar TODOS os jogadores disponíveis (mesmo que ultrapasse esse número). O sistema definirá automaticamente quem começa jogando pela ordem de chegada, sua tarefa é apenas equilibrar os elencos (Titulares + Reservas) tecnicamente.
+    IMPORTANTE: JOGADORES COM A POSIÇÃO 'Goleiro' NÃO DEVEM SER SORTEADOS. Eles serão selecionados manualmente pelo usuário. Sua tarefa é apenas equilibrar o restante do elenco.
+
+    Nota: O limite de jogadores de linha em campo é ${playersPerTeam - 1} (total de ${playersPerTeam} menos 1 goleiro), mas você deve alocar TODOS os jogadores de linha disponíveis.
 
     JOGADORES DISPONÍVEIS:
     ${playersList}
@@ -51,9 +53,9 @@ export const generateSmartTeams = async (
     - Tente garantir que ambos os times tenham peças suficientes para suprir essa formação.
 
     REGRAS DE OURO:
-    1. DISTRIBUIÇÃO TOTAL: Todos os nomes da lista DEVEM estar ou no Time A ou no Time B.
+    1. DISTRIBUIÇÃO TOTAL: Todos os jogadores de linha da lista DEVEM estar ou no Time A ou no Time B.
     2. EQUILÍBRIO TÁTICO: 
-       - Distribua Goleiros, Defensores, Meias e Atacantes igualmente entre os dois grupos.
+       - Distribua Defensores, Meias e Atacantes igualmente entre os dois grupos.
        - Distribua os jogadores de maior Rank (pts) equitativamente.
     
     3. ROTAÇÃO E VARIABILIDADE: 
@@ -64,7 +66,7 @@ export const generateSmartTeams = async (
        - Retorne APENAS o JSON com os nomes exatos.
     
     5. RACIOCÍNIO (reasoning): 
-       - Explique brevemente como você equilibrou os reservas e titulares.
+       - Explique brevemente como você equilibrou os jogadores de linha.
   `;
 
   try {
